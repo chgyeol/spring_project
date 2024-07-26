@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="./js/index.js"></script>
+<title>Ajax 통신(배열)</title>
+<script src="./js/jquery.js"></script>
+<script src="./js/index.js?v=1"></script>
 <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
 <body>
-<div class="box"></div>
-메인페이지
-<img src="./images/1.jpg">
+<input type="button" value="클릭" id="btn">
+<input type="button" value="post ajax" id="btn2">
 </body>
 </html>
