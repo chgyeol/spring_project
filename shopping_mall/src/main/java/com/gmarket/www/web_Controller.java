@@ -23,6 +23,8 @@ public class web_Controller {
 	
 	PrintWriter pw =null;
 	
+	
+	
 	//숙제
 	@PostMapping("/ajaxok4.do")
 	public String ajaxok4(@RequestBody String arr, HttpServletResponse res) throws Exception{
@@ -48,10 +50,21 @@ public class web_Controller {
 		else {
 			System.out.println("결제내역은 다음과 같습니다.");
 		}
-		
 		return null;
 	}
 	
+	//session을 쓰는 다른 방법
+	//HttpSession : 해당 interface를 활용하여 세션을 빠르게 구현하는 방식
+	@PostMapping("/loginok.do")
+	public String loginok(@RequestParam(value="",required = false) String mid, HttpSession session) {
+		if(mid!=null || mid!="") {
+			session.setAttribute("mid", mid);
+			session.setMaxInactiveInterval(1800);
+		}
+		return null;
+	}
+	
+	/*
 	@PostMapping("/loginok.do")
 	public String loginok(String mid, HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -59,6 +72,7 @@ public class web_Controller {
 		session.setMaxInactiveInterval(1800);	//이거 안 쓰면 바로 로그아웃 됨
 		return null;
 	}
+	*/
 	
 	@CrossOrigin(origins="*",allowedHeaders = "*")
 	@PostMapping("/ajaxok3.do")
