@@ -26,11 +26,11 @@ public class web_Controller {
 	@PostMapping("/ajaxok3.do")
 	public String ajaxok3(@RequestBody String arr) {
 		System.out.println(arr);
-		/*
-		JSONArray ja2 = new JSONArray();
-		ja2.put(new JSONArray(ja.get(0)));
-		ja2.put(new JSONArray(ja.get(1)));
-		*/
+		String arr2 = arr.substring(1, arr.length()-1);
+		System.out.println(arr2);
+		JSONArray ja = new JSONArray(arr2);
+		JSONArray ja2 = new JSONArray(ja.get(0));
+		JSONArray ja3 = new JSONArray(ja.get(1));
 		//System.out.println(ja);
 		return null;
 	}
