@@ -4,7 +4,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,24 +16,64 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 public class web_Controller {
 	
 	PrintWriter pw =null;
 	
+	//숙제
+	@PostMapping("/ajaxok4.do")
+	public String ajaxok4(@RequestBody String arr, HttpServletResponse res) throws Exception{
+		//System.out.println(arr);
+		JSONArray ja = new JSONArray(arr);
+		//System.out.println(ja);
+		JSONObject jo = new JSONObject(ja.get(0).toString());
+		JSONObject jo2 = new JSONObject(ja.get(1).toString());
+		JSONObject jo3 = new JSONObject(ja.get(2).toString());
+		System.out.println(jo3.get("seq"));
+		this.pw = res.getWriter();
+		this.pw.print("ok");
+		this.pw.close();
+		return null;
+	}
 	
+	@GetMapping("/restapi.do")
+	//@SessionAttribute : session이 이미 등록 되어 있는 상황일 경우 해당 정보를 가져올 수 있음
+	public String restapi(@SessionAttribute(name="mid", required = false) String mid) throws Exception {
+		if(mid==null) {
+			System.out.println("로그인 해야만 결제 내역을 확인하실 수 있습니다.");
+		}
+		else {
+			System.out.println("결제내역은 다음과 같습니다.");
+		}
+		
+		return null;
+	}
+	
+	@PostMapping("/loginok.do")
+	public String loginok(String mid, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.setAttribute("mid", mid);
+		session.setMaxInactiveInterval(1800);	//이거 안 쓰면 바로 로그아웃 됨
+		return null;
+	}
 	
 	@CrossOrigin(origins="*",allowedHeaders = "*")
 	@PostMapping("/ajaxok3.do")
-	public String ajaxok3(@RequestBody String arr) {
+	public String ajaxok3(@RequestBody String arr, HttpServletResponse res) throws Exception{
 		System.out.println(arr);
 		String arr2 = arr.substring(1, arr.length()-1);
 		System.out.println(arr2);
 		JSONArray ja = new JSONArray(arr2);
-		JSONArray ja2 = new JSONArray(ja.get(0));
-		JSONArray ja3 = new JSONArray(ja.get(1));
-		//System.out.println(ja);
+		JSONArray ja2 = new JSONArray(ja.get(0).toString());
+		JSONArray ja3 = new JSONArray(ja.get(1).toString());
+		System.out.println(ja2);
+		System.out.println(ja3);
+		this.pw = res.getWriter();
+		this.pw.print("ok");
+		this.pw.close();
 		return null;
 	}
 	
