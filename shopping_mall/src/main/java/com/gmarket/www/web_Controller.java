@@ -1,6 +1,7 @@
 package com.gmarket.www;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -22,14 +23,30 @@ public class web_Controller {
 	
 	
 	@CrossOrigin(origins="*",allowedHeaders = "*")
+	@PostMapping("/ajaxok3.do")
+	public String ajaxok3(@RequestBody String arr) {
+		System.out.println(arr);
+		/*
+		JSONArray ja2 = new JSONArray();
+		ja2.put(new JSONArray(ja.get(0)));
+		ja2.put(new JSONArray(ja.get(1)));
+		*/
+		//System.out.println(ja);
+		return null;
+	}
+	
+	//@RequestBody : JSON.stringfy
+	@CrossOrigin(origins="*",allowedHeaders = "*")
 	@PostMapping("/ajaxok2.do")
 	public String ajaxok2(@RequestBody String all_data, HttpServletResponse res) throws Exception {
-		JSONObject jo = new JSONObject(all_data);
+		System.out.println(all_data);	//{"all_data":[]}
+		JSONObject jo = new JSONObject(all_data);	//{} 인식 시킨 후 key값으로 배열 체크
 		JSONArray ja = new JSONArray(jo.get("all_data").toString());
 		System.out.println(ja.get(0));
 		JSONArray ja2 = (JSONArray)jo.get("all_data");
 		System.out.println(ja2.get(0));
 		
+		//Front가 datatype을 JSON으로 받겠다고 해서 JSON으로 날려줌
 		JSONObject result = new JSONObject();
 		result.put("result", "ok");
 		this.pw = res.getWriter();
