@@ -21,6 +21,7 @@
 	<resources mapping="/images/**" location="/images/" />
 	<resources mapping="/upload/**" location="/upload/" />
 	<resources mapping="/product/**" location="/product/" />
+	<resources mapping="/shopbag_admin/**" location="/shopbag_admin/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -28,7 +29,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.gmarket.www" />
+	<context:component-scan base-package="com.gmarket.www,shopping,shopping_admin" />
 	
 	
 	

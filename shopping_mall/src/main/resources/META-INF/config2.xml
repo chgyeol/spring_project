@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="userdao" type="com.gmarket.www.user_dao"/>
+		<typeAlias alias="admindao" type="shopping_admin.admin_dao"/>
 	</typeAliases>
 
 </configuration>
