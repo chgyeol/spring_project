@@ -14,10 +14,13 @@
     <link rel="icon" href="./img/logo.png" sizes="64x64">
     <link rel="icon" href="./img/logo.png" sizes="32x32">
     <link rel="icon" href="./img/logo.png" sizes="16x16">
+    <script src="./js/admin_list.js"></script>
 </head>
 <body>
-<%@ include file="./admin_banner.jsp" %>
-<%@ include file="./admin_top.jsp" %>
+  <form id="banner_frm">
+<%@ include file="/shopbag_admin/admin_banner.jsp" %>
+  </form>
+<%@ include file="/shopbag_admin/admin_top.jsp" %>
 <main class="maincss">
 <section>
     <p>신규등록 관리자</p>
@@ -53,6 +56,6 @@
 <section></section>
 <section></section>
 </main>
-<%@ include file="./admin_bottom.jsp" %>
+<%@ include file="/shopbag_admin/admin_bottom.jsp" %>
 </body>
 </html>
