@@ -17,9 +17,7 @@
     <script src="./js/admin_list.js"></script>
 </head>
 <body>
-  <form id="banner_frm">
 <%@ include file="/shopbag_admin/admin_banner.jsp" %>
-  </form>
 <%@ include file="/shopbag_admin/admin_top.jsp" %>
 <main class="maincss">
 <section>

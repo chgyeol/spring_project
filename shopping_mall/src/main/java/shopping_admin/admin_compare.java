@@ -18,6 +18,29 @@ public class admin_compare {
 	private SqlSessionTemplate tm;
 	Map<String, Object> allm = null;
 
+	
+	//어드민 계정 추가
+	public int add_master_insert(admin_dao dao) {
+		int result = tm.insert("Shopbag_admin.add_master",dao);
+		return result;
+	}
+	
+	//어드민 아이디 중복 체크
+	public String admin_id_dupl(String i_aid) {
+		String result = "";
+		int ctn = tm.selectOne("Shopbag_admin.a_count",i_aid);
+		if(ctn==0) {
+			result="yes";
+		}
+		else if(ctn==1) {
+			result="no";
+		}
+		else {
+			result="error";
+		}
+		return result;
+	}
+	
 	//어드민 비번 암호화(sha2 16진법)
 	public String adminpw(String apass) {
 		String s_apass = "";
@@ -46,6 +69,7 @@ public class admin_compare {
 		this.allm.put("aidx", adl.get(0).getAidx());
 		this.allm.put("aid", adl.get(0).getAid());
 		this.allm.put("aname", adl.get(0).getAname());
+		this.allm.put("ause", adl.get(0).getAuse());
 		this.allm.put("amaster", adl.get(0).getAmaster());
 		//System.out.println(adl.get(0).getAidx());
 	}
