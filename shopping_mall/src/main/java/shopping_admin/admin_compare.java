@@ -19,6 +19,22 @@ public class admin_compare {
 	Map<String, Object> allm = null;
 
 	
+	//어드민 멤버 수(master 제외)
+	public int admin_ctn() {
+		this.allm = new HashMap<String, Object>();
+		this.allm.put("part", 2);
+		int ctn = tm.selectOne("Shopbag_admin.a_count",this.allm);
+		return ctn;
+	}
+	
+	//어드민 멤버 목록(master 제외)
+	public List<admin_dao> admin_list(){
+		this.allm = new HashMap<String, Object>();
+		this.allm.put("part", 2);
+		List<admin_dao> data = tm.selectList("Shopbag_admin.a_all",this.allm);
+		return data;
+	}
+	
 	//어드민 계정 추가
 	public int add_master_insert(admin_dao dao) {
 		int result = tm.insert("Shopbag_admin.add_master",dao);
@@ -28,7 +44,10 @@ public class admin_compare {
 	//어드민 아이디 중복 체크
 	public String admin_id_dupl(String i_aid) {
 		String result = "";
-		int ctn = tm.selectOne("Shopbag_admin.a_count",i_aid);
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("part", "1");
+		data.put("aid", i_aid);
+		int ctn = tm.selectOne("Shopbag_admin.a_count",data);
 		if(ctn==0) {
 			result="yes";
 		}
@@ -77,9 +96,12 @@ public class admin_compare {
 	//어드민 아이디, 비번 비교
 	public String admindata(String aid, String apass){
 		String result = "";
-		int ctn = tm.selectOne("Shopbag_admin.a_count",aid);
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("part", "1");
+		data.put("aid", aid);
+		int ctn = tm.selectOne("Shopbag_admin.a_count",data);
 		if(ctn==1){
-			List<admin_dao> adl = tm.selectList("Shopbag_admin.a_all",aid);
+			List<admin_dao> adl = tm.selectList("Shopbag_admin.a_all",data);
 			String c_apass = adl.get(0).getApass();
 			String s_apass = adminpw(apass);
 			if(s_apass.equals("error")) {

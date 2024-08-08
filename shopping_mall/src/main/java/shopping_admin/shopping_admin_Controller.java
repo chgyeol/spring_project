@@ -1,12 +1,14 @@
 package shopping_admin;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,14 +23,20 @@ public class shopping_admin_Controller {
 	private admin_compare ac;
 	
 	
+
+	
 	//admin 메뉴 이동
 	@PostMapping("/shopbag_admin/gopageok.do")
-	public String gopageok(@RequestParam("go_lo") String go_lo, HttpServletResponse res) throws Exception{
+	public String gopageok(Model m, @RequestParam("go_lo") String go_lo, HttpServletResponse res) throws Exception{
 		String lc = "";
 		//System.out.println(go_lo);
 		switch (go_lo) {
 		case "관리자 리스트":
 			lc="/admin_list";
+			List<admin_dao> lists = ac.admin_list();
+			int ctn = ac.admin_ctn();
+			m.addAttribute("lists",lists);
+			m.addAttribute("ctn",ctn);
 			break;
 		case "회원관리":
 			lc="/shop_member_list";

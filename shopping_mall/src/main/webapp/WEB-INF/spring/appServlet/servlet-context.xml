@@ -16,12 +16,17 @@
 	<!-- 해당 resources 태그는 특정 디렉토리를 설정하여 각종 속성파일을 로드 할 수 있도록 설정하는 보안 태그입니다. -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/js/**" location="/js/" />
+	<resources mapping="/pay/**" location="/pay/"/>
+	
 	<!-- css 말고 .map, .scss 올리는거 방지 -->
 	<resources mapping="/css/*.css" location="/css/" />
 	<resources mapping="/images/**" location="/images/" />
 	<resources mapping="/upload/**" location="/upload/" />
 	<resources mapping="/product/**" location="/product/" />
+	
+	<!-- 개인프로젝트 -->
 	<resources mapping="/shopbag_admin/**" location="/shopbag_admin/" />
+	<resources mapping="/shopbag_mall/**" location="/shopbag_mall/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -31,6 +36,11 @@
 	
 	<context:component-scan base-package="com.gmarket.www,shopping,shopping_admin,pay" />
 	
-	
+	<!-- File :이거 안 쓰면 파일 첨부 못한다 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<beans:property name="defaultEncoding" value="utf-8"/>
+	<beans:property name="maxUploadSize" value="3154728"/><!-- value="-1" : 무한대 -->
+	<beans:property name="maxInMemorySize" value="2097152"/>
+	</beans:bean>
 	
 </beans:beans>

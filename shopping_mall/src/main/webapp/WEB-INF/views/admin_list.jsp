@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,6 +21,16 @@
 <body>
 <%@ include file="/shopbag_admin/admin_banner.jsp" %>
 <%@ include file="/shopbag_admin/admin_top.jsp" %>
+<%
+if(!amaster.equals("Y")){
+%>
+<script>
+alert("잘못된 접근입니다.");
+history.go(-1);
+</script>
+<%
+}
+%>
 <main class="maincss">
 <section>
     <p>신규등록 관리자</p>
@@ -33,23 +45,33 @@
         <li>가입일자</li>
         <li>승인여부</li>
     </ol>
-    <ol class="new_admin_none">
-        <li>신규 등록된 관리자가 없습니다.</li>
-    </ol>
-    <ol class="new_admin_lists2">
-        <li>1</li>
-        <li>한석봉</li>
-        <li>hansbong</li>
-        <li>01012345678</li>
-        <li>hansbong@hanmail.net</li>
-        <li>디자인팀</li>
-        <li>주임</li>
-        <li>2024-07-29</li>
-        <li>
-            <input type="button" value="승인" class="new_addbtn1" title="승인">
-            <input type="button" value="미승인" class="new_addbtn2" title="미승인">
-        </li>
-    </ol>
+	<cr:if test="${ctn==0}">
+	    <ol class="new_admin_none">
+	        <li>신규 등록된 관리자가 없습니다.</li>
+	    </ol>
+	</cr:if>
+	<cr:if test="${ctn>0}">
+	    <cr:forEach var="admin" items="${lists}" varStatus="aidx">
+			<ol class="new_admin_lists2">
+		        <li>${ctn-aidx.index}</li>
+		        <li>${admin.getAname()}</li>
+		        <li>${admin.getAid()}</li>
+		        <li>${admin.getAphone()}</li>
+		        <li>${admin.getAemail()}</li>
+		        <li>${admin.getApart()}</li>
+		        <li>${admin.getAposition()}</li>
+		        <li>${admin.getAindate().substring(0,10)}</li>
+		        <li>
+		        <cr:if test="${admin.getAuse()=='N'}">
+		            <input type="button" value="승인" class="new_addbtn1" title="승인" onclick="agree(this.value)">
+		        </cr:if>
+		        <cr:if test="${admin.getAuse()=='Y'}">
+		            <input type="button" value="미승인" class="new_addbtn2" title="미승인" onclick="agree(this.value)">
+		        </cr:if>
+		        </li>
+		    </ol>
+    	</cr:forEach>
+	</cr:if>
 </section>
 <section></section>
 <section></section>

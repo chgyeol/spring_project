@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Shopbag_admin">
-<select id="a_count" resultType="int">
-select count(*) as ctn from shopbag_admin where aid=#{aid} order by aidx desc
+<select id="a_count"  parameterType="Map" resultType="int">
+select count(*) as ctn from shopbag_admin where 
+<choose>
+	<when test="part==1">	<!-- 아이디 중복 체크 -->
+		aid=#{aid} order by aidx desc
+	</when>	<!-- master 제외 멤버 수 -->
+	<when test="part==2">
+		amaster='N' order by aidx desc
+	</when>
+</choose>
 </select>
 <select id="a_pw" resultType="String">
 select apass from shopbag_admin where aid=#{aid} order by aidx desc
 </select>
-<select id="a_all" resultType="admindao">
-select * from shopbag_admin where aid=#{aid} order by aidx desc
+<select id="a_all" parameterType="Map" resultType="admindao">
+select * from shopbag_admin where 
+<choose>
+	<when test="part==1">	<!-- 해당 관리자 정보 -->
+		aid=#{aid} order by aidx desc
+	</when>
+	<when test="part==2">	<!-- master 제외 관리자 모두 -->
+		amaster='N' order by aidx desc
+	</when>
+</choose>
 </select>
 
 <insert id="add_master">
