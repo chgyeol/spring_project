@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script src="./js/admin_top.js"></script>
+<script src="./js/admin_top.js?v=10"></script>
 <form id="top_frm">
 <nav class="navcss">
     <div class="nav_div">
@@ -16,8 +16,7 @@
             <li title="쇼핑몰 기본설정" onclick="go_page('기본설정')">쇼핑몰 기본설정</li>
             <li title="쇼핑몰 공지사항" onclick="go_page('공지사항')">쇼핑몰 공지사항</li>
         </ol>
-        	<input type="hidden" name="go_lo">
     </div>
-
+<input type="hidden" name="go_lo">
 </nav>
 </form>

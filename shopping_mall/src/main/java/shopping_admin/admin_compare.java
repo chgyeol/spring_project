@@ -19,6 +19,16 @@ public class admin_compare {
 	Map<String, Object> allm = null;
 
 	
+	//어드민 멤버 승인 여부 변경
+	public int admin_app(String ause, String aid) {
+		this.allm = new HashMap<String, Object>();
+		this.allm.put("ause", ause);
+		this.allm.put("aid", aid);
+		int result = tm.update("Shopbag_admin.admin_app",this.allm);
+		//System.out.println(result);
+		return result;
+	}
+	
 	//어드민 멤버 수(master 제외)
 	public int admin_ctn() {
 		this.allm = new HashMap<String, Object>();

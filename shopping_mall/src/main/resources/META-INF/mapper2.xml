@@ -30,4 +30,8 @@ select * from shopbag_admin where
 <insert id="add_master">
 insert into shopbag_admin values ('0',#{aid},#{apass},#{aname},#{aemail},#{aphone},#{apart},#{aposition},'N','N',now())
 </insert>
+
+<update id="admin_app" parameterType="Map">
+update shopbag_admin set ause=#{ause} where aid=#{aid}
+</update>
 </mapper>

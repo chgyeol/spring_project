@@ -26,7 +26,7 @@
 <ul class="info_form">
     <li>홈페이지 제목</li>
     <li>
-        <input type="text" value="" class="in_form1"> 
+        <input type="text" value="" class="in_form1" name="page_title"> 
     </li>
 </ul>    
 <ul class="info_form">

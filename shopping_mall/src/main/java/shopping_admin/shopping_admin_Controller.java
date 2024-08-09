@@ -23,11 +23,49 @@ public class shopping_admin_Controller {
 	private admin_compare ac;
 	
 	
-
+	//admin_list에서 신규관리자 승인/미승인
+	@PostMapping("/shopbag_admin/admin_approve.do")
+	public void admin_approve(@RequestParam("aid") String aid, @RequestParam("ause") String ause, HttpServletResponse res) throws Exception {
+		res.setContentType("text/html;charset=utf-8");
+		this.pw = res.getWriter();
+		try {
+			int result = ac.admin_app(ause, aid);
+			if(result>0 && ause.equals("Y")) {
+				this.pw.write("<script>"
+					+ "alert('관리자 승인 되었습니다.');"
+					+ "location.href='./gopageok.do?go_lo=관리자 리스트';"
+					+ "</script>");
+				this.pw.close();
+			}
+			else if(result>0 && ause.equals("N")) {
+				this.pw.write("<script>"
+					+ "alert('관리자 승인 해제가 완료되었습니다.');"
+					+ "location.href='./gopageok.do?go_lo=관리자 리스트';"
+					+ "</script>");
+				this.pw.close();
+			}
+			else {
+				this.pw.write("<script>"
+					+ "alert('과정이 올바르게 진행 되지 않았습니다.');"
+					+ "history.go(-1);"
+					+ "</script>");
+				this.pw.close();
+			}
+		} 
+		catch (Exception e) {
+			System.out.println(e);
+			this.pw.write("<script>"
+					+ "alert('DB에러가 발생했습니다.');"
+					+ "history.go(-1);"
+					+ "</script>");
+			this.pw.close();
+		}
+	}
 	
 	//admin 메뉴 이동
-	@PostMapping("/shopbag_admin/gopageok.do")
-	public String gopageok(Model m, @RequestParam("go_lo") String go_lo, HttpServletResponse res) throws Exception{
+	@GetMapping("/shopbag_admin/gopageok.do")
+	public String gopageok(Model m, @RequestParam(name = "go_lo") String go_lo, HttpServletResponse res) throws Exception{
+		res.setContentType("text/html;charset=utf-8");
 		String lc = "";
 		//System.out.println(go_lo);
 		switch (go_lo) {

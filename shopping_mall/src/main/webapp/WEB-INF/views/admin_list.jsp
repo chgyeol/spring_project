@@ -16,7 +16,7 @@
     <link rel="icon" href="./img/logo.png" sizes="64x64">
     <link rel="icon" href="./img/logo.png" sizes="32x32">
     <link rel="icon" href="./img/logo.png" sizes="16x16">
-    <script src="./js/admin_list.js"></script>
+    <script src="./js/admin_list.js?v=2"></script>
 </head>
 <body>
 <%@ include file="/shopbag_admin/admin_banner.jsp" %>
@@ -52,7 +52,7 @@ history.go(-1);
 	</cr:if>
 	<cr:if test="${ctn>0}">
 	    <cr:forEach var="admin" items="${lists}" varStatus="aidx">
-			<ol class="new_admin_lists2">
+			<ol class="new_admin_lists2" id="${adix.index}">
 		        <li>${ctn-aidx.index}</li>
 		        <li>${admin.getAname()}</li>
 		        <li>${admin.getAid()}</li>
@@ -63,19 +63,21 @@ history.go(-1);
 		        <li>${admin.getAindate().substring(0,10)}</li>
 		        <li>
 		        <cr:if test="${admin.getAuse()=='N'}">
-		            <input type="button" value="승인" class="new_addbtn1" title="승인" onclick="agree(this.value)">
+		            <input type="button" value="승인" class="new_addbtn1" title="승인" onclick="agree('${admin.getAid()}',this.value)">
 		        </cr:if>
 		        <cr:if test="${admin.getAuse()=='Y'}">
-		            <input type="button" value="미승인" class="new_addbtn2" title="미승인" onclick="agree(this.value)">
+		            <input type="button" value="미승인" class="new_addbtn2" title="미승인" onclick="agree('${admin.getAid()}',this.value)">
 		        </cr:if>
 		        </li>
 		    </ol>
     	</cr:forEach>
 	</cr:if>
 </section>
-<section></section>
-<section></section>
 </main>
+<form id="list_frm">
+<input type="hidden" name="ause">
+<input type="hidden" name="aid">
+</form>
 <%@ include file="/shopbag_admin/admin_bottom.jsp" %>
 </body>
 </html>
