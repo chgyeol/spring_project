@@ -14,14 +14,22 @@
         String amaster = (String)hs.getAttribute("amaster");
         %>
         <%
-        if(amaster.equals("Y")){
+        if(amaster==null){
         %>
-        <p>최고관리자 <%=aname%>님 <a href="#">[개인정보 수정]</a> <a onclick="logoutok()">[로그아웃]</a></p>
+        <script>
+        alert("세션 시간이 만료됐습니다. 로그인 화면으로 돌아갑니다.");
+        location.href="./";
+        </script>
     	<%
     	}
         else if(amaster.equals("N")){
         %>
         <p><%=aname%> 관리자 <a href="#">[개인정보 수정]</a> <a onclick="logoutok()">[로그아웃]</a></p>
+        <%
+        }
+        else if(amaster.equals("Y")){
+        %>
+        <p>최고관리자 <%=aname%>님 <a href="#">[개인정보 수정]</a> <a onclick="logoutok()">[로그아웃]</a></p>
         <%
         }
         else{
