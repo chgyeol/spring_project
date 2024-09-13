@@ -23,6 +23,12 @@ public class shopping_admin_Controller {
 	private admin_compare ac;
 	
 	
+	//admin_siteinfo에서 설정 저장
+	@PostMapping("/shopbag_admin/admin_siteinfo.do")
+	public void admin_siteinfo(@ModelAttribute siteinfo_dao sdao) {
+		
+	}
+	
 	//admin_list에서 신규관리자 승인/미승인
 	@PostMapping("/shopbag_admin/admin_approve.do")
 	public void admin_approve(@RequestParam("aid") String aid, @RequestParam("ause") String ause, HttpServletResponse res) throws Exception {
@@ -84,6 +90,8 @@ public class shopping_admin_Controller {
 			break;
 		case "기본설정":
 			lc="/admin_siteinfo";
+			List<siteinfo_dao> site_data = ac.admin_siteinfo();
+			m.addAttribute("site_data",site_data);
 			break;
 		case "공지사항":
 			lc="/notice_list";

@@ -5,6 +5,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="admindao" type="shopping_admin.admin_dao"/>
+		<typeAlias alias="siteinfodao" type="shopping_admin.siteinfo_dao"/>
 	</typeAliases>
-
 </configuration>

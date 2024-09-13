@@ -27,11 +27,26 @@ select * from shopbag_admin where
 </choose>
 </select>
 
+<select id="s_info" resultType="siteinfodao">
+select * from siteinfo where sidx=#{sidx}
+</select>
+<select id="s_ctn">
+select count(*) as ctn from siteinfo
+</select>
+
+<insert id="s_finfo" parameterType="siteinfodao">
+insert into siteinfo values ('0',)
+</insert>
+
 <insert id="add_master">
 insert into shopbag_admin values ('0',#{aid},#{apass},#{aname},#{aemail},#{aphone},#{apart},#{aposition},'N','N',now())
 </insert>
 
 <update id="admin_app" parameterType="Map">
 update shopbag_admin set ause=#{ause} where aid=#{aid}
+</update>
+
+<update id="siteinfo_update" parameterType="siteinfodao">
+update siteinfo set sstitle=#{sstitle},ssaemail=#{ssaemail} where sidx=#{sidx}
 </update>
 </mapper>

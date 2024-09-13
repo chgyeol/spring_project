@@ -19,6 +19,22 @@ public class admin_compare {
 	Map<String, Object> allm = null;
 
 	
+	//siteinfo(쇼핑몰 기본설정 수정하기)
+	public int siteinfo_update(siteinfo_dao sdao) {
+		
+		
+		return 0;
+	}
+	
+	//siteinfo(쇼핑몰 기본설정 불러오기)
+	public List<siteinfo_dao> admin_siteinfo(){
+		if((int)tm.selectOne("Shopbag_admin.s_ctn")==0) {
+			
+		}
+		List<siteinfo_dao> data = tm.selectList("Shopbag_admin.s_info");
+		return data;
+	}
+	
 	//어드민 멤버 승인 여부 변경
 	public int admin_app(String ause, String aid) {
 		this.allm = new HashMap<String, Object>();
